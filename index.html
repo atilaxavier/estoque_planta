@@ -843,6 +843,29 @@
   </g>
 </svg>
 
+    <style>
+        #meuPopup {
+            padding: 20px;
+            border-radius: 8px;
+            min-width: 300px;
+            max-width: 80vw; /* 80% da largura da viewport */
+        }
+        #tituloPopup {
+            margin-top: 0;
+            color: #333;
+            word-wrap: break-word;
+        }
+        #textoPopup table {
+            margin: 15px 0;
+            width: 100%;
+        }
+        #textoPopup td {
+            padding: 8px;
+            word-wrap: break-word;
+            max-width: 300px; /* máxima largura da célula */
+        }
+    </style>
+
    <dialog id="meuPopup">
       <h2 id="tituloPopup">Título original</h2>
          <p id="textoPopup">Texto original</p>
@@ -927,8 +950,8 @@
                 for (let chave in novoTexto) {
                     tabelaHtml += `
                         <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 8px; font-weight: bold;">${chave}</td>
-                            <td style="padding: 8px;">${novoTexto[chave] || '-'}</td>
+                            <td style="font-weight: bold; width: 30%;">${chave}</td>
+                            <td style="width: 70%;">${novoTexto[chave] || '-'}</td>
                         </tr>`;
                 }
             } else {
@@ -953,7 +976,7 @@
 
          // Monta os dados para o popup
          const popupData = {
-            Area: dados.Area,
+            Area: dados["Area (m2)"],
             "DT ENTR": dados["DT ENTR"],
             "DT SAIDA PREVISTA": dados["DT SAIDA PREVISTA"],
             Quantidade: dados.Quantidade,
