@@ -898,17 +898,26 @@
       }
 
         function colorirRetangulosVazios() {
+            console.log("Iniciando coloração dos retângulos vazios...");
+            
             dadosPlanilha.forEach(linha => {
                 const identificador = linha.IDENTIFICADOR;
                 if (!linha["DT ENTR"] || linha["DT ENTR"].trim() === '') {
-                    // Encontra o grupo pelo ID e colore o retângulo dentro dele
-                    const grupo = document.getElementById('g' + identificador);
-                    if (grupo) {
-                        const retangulo = grupo.querySelector('rect');
-                        if (retangulo) {
-                            retangulo.setAttribute('fill', '#404040'); // Cinza escuro
-                            retangulo.setAttribute('fill-opacity', '1');
-                        }
+                    console.log(`Processando identificador vazio: ${identificador}`);
+                    
+                    // Tenta encontrar o retângulo usando o ID específico
+                    let rectId = identificador.startsWith('TD') 
+                        ? `rectTD${identificador.substring(2)}` 
+                        : `rectTQ${identificador}`;
+                    
+                    const retangulo = document.getElementById(rectId);
+                    if (retangulo) {
+                        console.log(`Retângulo encontrado: ${rectId}`);
+                        retangulo.setAttribute('fill', '#404040');
+                        retangulo.setAttribute('fill-opacity', '1');
+                        retangulo.style.fillOpacity = '1';  // Garante que a opacidade seja aplicada
+                    } else {
+                        console.log(`Retângulo não encontrado: ${rectId}`);
                     }
                 }
             });
