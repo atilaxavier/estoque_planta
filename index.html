@@ -856,7 +856,7 @@
       let dadosPlanilha = [];
 
       function carregarPlanilha() {
-         fetch(csvUrl)
+        fetch(csvUrl)
             .then(response => response.text())
             .then(csvText => {
                   dadosPlanilha = csvParaArray(csvText);
@@ -864,6 +864,8 @@
                   // Exemplo: buscar por identificador
                   // abrirPopupPorTanque('TQ-01');
             });
+        console.log("carregarPlanilha foi executada!");
+        console.log("Conteúdo da planilha:", dadosPlanilha);
       }
 
       // Função para converter CSV em array de objetos
