@@ -888,6 +888,8 @@
                   // abrirPopupPorTanque('TQ-01');
                 console.log("carregarPlanilha foi executada! Planilha com: ", dadosPlanilha.length);
                 console.log("Conteúdo da planilha:", dadosPlanilha);
+                // Colorir retângulos vazios após carregar a planilha
+                colorirRetangulosVazios();
             })
             .catch(error => {
                 console.error('Erro ao carregar a planilha:', error);
