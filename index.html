@@ -895,6 +895,23 @@
 
       }
 
+        function colorirRetangulosVazios() {
+            dadosPlanilha.forEach(linha => {
+                const identificador = linha.IDENTIFICADOR;
+                if (!linha["DT ENTR"] || linha["DT ENTR"].trim() === '') {
+                    // Encontra o grupo pelo ID e colore o retângulo dentro dele
+                    const grupo = document.getElementById('g' + identificador);
+                    if (grupo) {
+                        const retangulo = grupo.querySelector('rect');
+                        if (retangulo) {
+                            retangulo.setAttribute('fill', '#404040'); // Cinza escuro
+                            retangulo.setAttribute('fill-opacity', '1');
+                        }
+                    }
+                }
+            });
+        }
+
       // Função para converter CSV em array de objetos
       function csvParaArray(csv) {
          const linhas = csv.split('\n').map(l => l.trim()).filter(l => l);
@@ -921,25 +938,6 @@
          return planilha.find(linha => linha.IDENTIFICADOR === identificador);
       }
 
-      //function abrirPopup(novoTitulo, novoTexto) {
-         // Altera o conteúdo do h2 e do p
-         //document.getElementById('tituloPopup').textContent = novoTitulo;
-         //document.getElementById('textoPopup').textContent = novoTexto;
-         //document.getElementById('tituloPopup').innerHTML = novoTitulo;
-         //document.getElementById('textoPopup').innerHTML = novoTexto;
-
-         // Abre o dialog
-         //document.getElementById('meuPopup').showModal();
-
-         // Converte os dados para texto, tratando objetos/arrays
-         //let tituloStr = (typeof novoTitulo === 'object') ? JSON.stringify(novoTitulo, null, 2) : String(novoTitulo);
-         //let textoStr  = (typeof novoTexto  === 'object') ? JSON.stringify(novoTexto, null, 2) : String(novoTexto);
-
-         //document.getElementById('tituloPopup').innerHTML = tituloStr;
-         //document.getElementById('textoPopup').innerHTML = textoStr;
-
-         //document.getElementById('meuPopup').showModal();
-      //}
 
         function abrirPopup(novoTitulo, novoTexto) {
             let tituloStr = (typeof novoTitulo === 'object') ? JSON.stringify(novoTitulo, null, 2) : String(novoTitulo);
