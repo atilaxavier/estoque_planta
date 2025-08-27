@@ -898,7 +898,7 @@
          return planilha.find(linha => linha.IDENTIFICADOR === identificador);
       }
 
-      function abrirPopup(novoTitulo, novoTexto) {
+      //function abrirPopup(novoTitulo, novoTexto) {
          // Altera o conteúdo do h2 e do p
          //document.getElementById('tituloPopup').textContent = novoTitulo;
          //document.getElementById('textoPopup').textContent = novoTexto;
@@ -909,14 +909,38 @@
          //document.getElementById('meuPopup').showModal();
 
          // Converte os dados para texto, tratando objetos/arrays
-         let tituloStr = (typeof novoTitulo === 'object') ? JSON.stringify(novoTitulo, null, 2) : String(novoTitulo);
-         let textoStr  = (typeof novoTexto  === 'object') ? JSON.stringify(novoTexto, null, 2) : String(novoTexto);
+         //let tituloStr = (typeof novoTitulo === 'object') ? JSON.stringify(novoTitulo, null, 2) : String(novoTitulo);
+         //let textoStr  = (typeof novoTexto  === 'object') ? JSON.stringify(novoTexto, null, 2) : String(novoTexto);
 
-         document.getElementById('tituloPopup').innerHTML = tituloStr;
-         document.getElementById('textoPopup').innerHTML = textoStr;
+         //document.getElementById('tituloPopup').innerHTML = tituloStr;
+         //document.getElementById('textoPopup').innerHTML = textoStr;
 
-         document.getElementById('meuPopup').showModal();
-      }
+         //document.getElementById('meuPopup').showModal();
+      //}
+
+        function abrirPopup(novoTitulo, novoTexto) {
+            let tituloStr = (typeof novoTitulo === 'object') ? JSON.stringify(novoTitulo, null, 2) : String(novoTitulo);
+            
+            // Criar tabela HTML para os dados
+            let tabelaHtml = '<table style="width:100%; border-collapse: collapse;">';
+            if (typeof novoTexto === 'object') {
+                for (let chave in novoTexto) {
+                    tabelaHtml += `
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 8px; font-weight: bold;">${chave}</td>
+                            <td style="padding: 8px;">${novoTexto[chave] || '-'}</td>
+                        </tr>`;
+                }
+            } else {
+                tabelaHtml += `<tr><td>${String(novoTexto)}</td></tr>`;
+            }
+            tabelaHtml += '</table>';
+
+            document.getElementById('tituloPopup').innerHTML = tituloStr;
+            document.getElementById('textoPopup').innerHTML = tabelaHtml;
+
+            document.getElementById('meuPopup').showModal();
+        }
 
       function abrirPopupComDadosDoGrupo(grupoId, planilha) {
          const identificador = extrairIdentificador(grupoId);
